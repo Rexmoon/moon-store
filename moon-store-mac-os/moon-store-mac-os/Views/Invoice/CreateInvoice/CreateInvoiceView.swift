@@ -78,7 +78,7 @@ struct CreateInvoiceView: View {
     private var invoiceGridList: some View {
         ScrollView(showsIndicators: false) {
             Grid(verticalSpacing: Constants.viewSpacing) {
-                ForEach(Array($viewModel.invoice.products.enumerated()), id: \.element.id) { index, $product in
+                ForEach(Array($viewModel.invoice.products.enumerated()), id: \.offset) { index, $product in
                     GridRow {
                         VStack {
                             Text(localized(.productMenuTitle))

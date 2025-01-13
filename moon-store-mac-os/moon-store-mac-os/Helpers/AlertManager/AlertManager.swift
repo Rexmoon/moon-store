@@ -36,24 +36,6 @@ final class AlertPresenter {
     static func showConfirmationAlert(message: String,
                                       actionButtonTitle: String,
                                       isDestructive: Bool = false,
-                                      action: Selector?) {
-        let alert = NSAlert()
-        
-        alert.messageText = AlertType.warning.title
-        alert.informativeText = message
-        alert.icon = NSImage(named: AlertType.warning.icon)
-        
-        let button = alert.addButton(withTitle: actionButtonTitle)
-        button.hasDestructiveAction = isDestructive
-        button.action = action
-        
-        alert.addButton(withTitle: "Cancelar")
-        alert.runModal()
-    }
-    
-    static func showConfirmationAlert(message: String,
-                                      actionButtonTitle: String,
-                                      isDestructive: Bool = false,
                                       action: (() -> Void)? = nil) {
         let alert = NSAlert()
         

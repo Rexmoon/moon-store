@@ -22,8 +22,8 @@ enum ReportSection: CaseIterable, Identifiable {
     var title: String {
         switch self {
             case .generalInventory: "Inventario general"
-            case .availableProducts: "Stock disponible"
-            case .outOfStockProducts: "Stock no disponible"
+            case .availableProducts: "Productos disponibles"
+            case .outOfStockProducts: "Productos agotados"
             case .bestSellingCategories: "Top categorías de ventas"
             case .weeklyProductSales: "Ventas de la última semana"
             case .monthlyProductSales: "Ventas del último mes"

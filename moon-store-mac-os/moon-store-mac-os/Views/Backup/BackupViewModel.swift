@@ -38,9 +38,11 @@ final class BackupViewModel: ObservableObject {
     func showBackupConfirmationAlert() {
         AlertPresenter.showConfirmationAlert(
             message: "Esta seguro que desea realizar un backup de la base de datos?",
-            actionButtonTitle: "Backup",
-            action: #selector(backupDatabase)
-        )
+            actionButtonTitle: "Backup"
+        ) { [weak self] in
+            guard let self else { return }
+            backupDatabase()
+        }
     }
     
     func restoreBackup(_ backup: String) {
