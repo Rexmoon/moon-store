@@ -22,8 +22,7 @@ final class GraphicsViewModel: ObservableObject {
     
     private var productsCount: Int = Constants.zero
     private var invoicesCount: Int = Constants.zero
-    private var activeUsersCount: Int = Constants.zero
-    private var suspendedUsersCount: Int = Constants.zero
+    private var usersCount: Int = Constants.zero
     private var products: [ProductModel] = []
     private var invoices: [InvoiceModel] = []
     
@@ -42,15 +41,13 @@ final class GraphicsViewModel: ObservableObject {
             defer { isLoading = false }
             
             do {
-                productsCount = try await productManager.getProductCount()
-                invoicesCount = try await invoiceManager.getInvoiceCount()
                 products = try await productManager.getProducts()
                 invoices = try await invoiceManager.getInvoices()
                 
-                let userCharts = try await userManager.getUsersChart()
+                usersCount = try await userManager.getUsers().count
                 
-                activeUsersCount = userCharts.activeUsersCount
-                suspendedUsersCount = userCharts.suspendedUsersCount
+                productsCount = products.count
+                invoicesCount = invoices.count
                 
                 loadCardGraphicCounters()
                 loadMostProductsSold()
@@ -66,7 +63,7 @@ final class GraphicsViewModel: ObservableObject {
         cardGraphicModels = [
             CardGraphic.products(productsCount).model,
             CardGraphic.invoices(invoicesCount).model,
-            CardGraphic.users(activeUsersCount).model
+            CardGraphic.users(usersCount).model
         ]
     }
     
