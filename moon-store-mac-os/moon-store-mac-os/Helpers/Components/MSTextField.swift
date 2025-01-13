@@ -2,7 +2,7 @@
 //  MSTextField.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 18/11/24.
+// Created by Jose Luna on 18/11/24.
 //
 
 import SwiftUI

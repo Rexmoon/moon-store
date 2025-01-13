@@ -2,7 +2,7 @@
 //  SpinnerModifier.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 30/12/24.
+// Created by Jose Luna on 30/12/24.
 //
 
 import SwiftUI

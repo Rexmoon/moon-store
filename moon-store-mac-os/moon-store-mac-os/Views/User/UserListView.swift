@@ -2,7 +2,7 @@
 //  UserListView.swift
 //  moon-store-mac-os
 //
-//  Created by Diana Zeledon on 23/12/24.
+// Created by Jose Luna on 23/12/24.
 //
 
 import SwiftUI

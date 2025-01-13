@@ -2,7 +2,7 @@
 //  ProfileView.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 5/1/25.
+// Created by Jose Luna on 5/1/25.
 //
 
 import SwiftUI

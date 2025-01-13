@@ -2,7 +2,7 @@
 //  ProductListConstants.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 4/1/25.
+// Created by Jose Luna on 4/1/25.
 //
 
 import Foundation

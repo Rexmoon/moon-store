@@ -2,7 +2,7 @@
 //  AlertType.swift
 //  moon-store-mac-os
 //
-//  Created by Diana Zeledon on 4/12/24.
+// Created by Jose Luna on 4/12/24.
 //
 
 import AppKit

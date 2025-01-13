@@ -2,7 +2,7 @@
 //  AppRouter.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 9/12/24.
+// Created by Jose Luna on 9/12/24.
 //
 
 import SwiftUI

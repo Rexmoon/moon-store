@@ -62,9 +62,11 @@ final class ProductListViewModel: ObservableObject {
         AlertPresenter.showConfirmationAlert(
             message: "¿Está seguro que quiere eliminar el producto?",
             actionButtonTitle: "Eliminar",
-            isDestructive: true,
-            action: #selector(deleteSelectedProduct)
-        )
+            isDestructive: true
+        ) { [weak self] in
+            guard let self else { return }
+            deleteSelectedProduct()
+        }
     }
     
     func supplyProductSelectedProduct(_ quantity: String) {
@@ -102,7 +104,6 @@ final class ProductListViewModel: ObservableObject {
         }
     }
     
-    @objc
     private func deleteSelectedProduct() {
         guard let productSelected else { return }
         

@@ -2,7 +2,7 @@
 //  ProductListView.swift
 //  moon-store-mac-os
 //
-//  Created by Diana Zeledon on 11/12/24.
+// Created by Jose Luna on 11/12/24.
 //
 
 import SwiftUI

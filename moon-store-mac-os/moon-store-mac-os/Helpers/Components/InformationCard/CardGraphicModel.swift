@@ -2,7 +2,7 @@
 //  Information.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 6/1/25.
+// Created by Jose Luna on 6/1/25.
 //
 
 import SwiftUI

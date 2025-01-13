@@ -27,9 +27,7 @@ final class BackupManager {
     
     func backupDatabase() async throws {
         do {
-            let data = try await networkManager.postData(for: .backupDatabase)
-            let response = try decoder.decode(BackupResponseModel.self, from: data)
-            debugPrint("Response: \(response.message)")
+            try await networkManager.postData(for: .backupDatabase)
         } catch {
             throw error
         }

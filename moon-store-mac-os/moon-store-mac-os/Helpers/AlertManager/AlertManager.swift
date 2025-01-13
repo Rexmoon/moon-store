@@ -2,7 +2,7 @@
 //  AlertManager.swift
 //  moon-store-mac-os
 //
-//  Created by Diana Zeledon on 4/12/24.
+// Created by Jose Luna on 4/12/24.
 //
 
 import AppKit
@@ -31,24 +31,6 @@ final class AlertPresenter {
         
         debugPrint("An Error occurred: \(error.localizedDescription)")
         showAlert(friendlyMessage, type: .error)
-    }
-    
-    static func showConfirmationAlert(message: String,
-                                      actionButtonTitle: String,
-                                      isDestructive: Bool = false,
-                                      action: Selector?) {
-        let alert = NSAlert()
-        
-        alert.messageText = AlertType.warning.title
-        alert.informativeText = message
-        alert.icon = NSImage(named: AlertType.warning.icon)
-        
-        let button = alert.addButton(withTitle: actionButtonTitle)
-        button.hasDestructiveAction = isDestructive
-        button.action = action
-        
-        alert.addButton(withTitle: "Cancelar")
-        alert.runModal()
     }
     
     static func showConfirmationAlert(message: String,

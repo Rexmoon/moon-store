@@ -2,7 +2,7 @@
 //  MainView.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 11/16/24.
+// Created by Jose Luna on 11/16/24.
 //
 
 import SwiftUI
@@ -14,6 +14,7 @@ private enum Constants {
 struct MainView: View {
     @EnvironmentObject private var router: AppRouter
     @State private var screenSelection: Screen = .profile
+    @State private var subNavigation: String?
     
     private let user: UserModel
     
@@ -52,7 +53,8 @@ struct MainView: View {
             case .backups: BackupView()
             case .invoices: InvoiceListView()
             case .createInvoice: CreateInvoiceView()
-            default: Text(screenSelection.rawValue)
+            case .salesReport: ReportView(subNavigation: $subNavigation)
+            @unknown default: Text(screenSelection.rawValue)
         }
     }
     
