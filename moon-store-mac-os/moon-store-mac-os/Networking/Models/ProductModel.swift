@@ -21,7 +21,20 @@ enum ProductCategory: String, Decodable, CaseIterable, Identifiable {
     
     var id: String { rawValue }
     
-    var title: String { rawValue.capitalized }
+    var title: String {
+        switch self {
+        case .laptop: "Portatil"
+        case .phone: "Telefono"
+        case .audio: "Audio"
+        case .pc: "PC"
+        case .printer: "Impresora"
+        case .battery: "Bateria"
+        case .wearable: "Dispositivo portatil"
+        case .home: "Hogar"
+        case .peripheral: "Periferico"
+        case .networking: "Redes"
+        }
+    }
     
     var color: Color {
         switch self {

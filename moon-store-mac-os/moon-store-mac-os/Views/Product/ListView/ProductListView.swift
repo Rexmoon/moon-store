@@ -56,7 +56,9 @@ struct ProductListView: View {
             .foregroundStyle(.msWhite)
         }
         .sheet(isPresented: $showAddProductModal) {
-            AddProductView()
+            AddProductView() {
+                viewModel.getProducts()
+            }
         }
         .sheet(isPresented: $showSupplyProductModal) {
             SupplyProductView(productName: viewModel.productSelected?.name ?? "") { quantity in

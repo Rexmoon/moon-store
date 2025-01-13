@@ -24,6 +24,12 @@ struct AddProductView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var viewModel: AddProductViewModel = .init()
     
+    private let onProductCreated: () -> Void
+    
+    init(onProductCreated: @escaping () -> Void) {
+        self.onProductCreated = onProductCreated
+    }
+    
     var body: some View {
         VStack(alignment: .trailing) {
             modalHeader
@@ -53,6 +59,7 @@ struct AddProductView: View {
         .onReceive(viewModel.$wasCreatedSuccessfully) { success in
             guard success else { return }
             dismiss()
+            onProductCreated()
         }
     }
     
@@ -153,6 +160,6 @@ extension AddProductView {
 }
 
 #Preview {
-    AddProductView()
+    AddProductView() { }
 }
 

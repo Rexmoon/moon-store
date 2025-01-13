@@ -154,7 +154,7 @@ extension CreateInvoiceView {
         switch key {
             case .addRowButton: "Agregar fila"
             case .previewButton: "Previzualizar"
-            case .createInvoiceButton: "Create Invoice"
+            case .createInvoiceButton: "Crear Factura"
             case .clientNameField: "Nombre del cliente"
             case .clientIdentificationField: "Identificación del cliente"
             case .productMenuTitle: "Producto"
