@@ -2,7 +2,7 @@
 //  UserListView.swift
 //  moon-store-mac-os
 //
-//  Created by Diana Zeledon on 23/12/24.
+// Created by Jose Luna on 23/12/24.
 //
 
 import SwiftUI
@@ -15,6 +15,7 @@ struct UserListView: View {
     var body: some View {
         VStack(spacing: UserConstants.spacing) {
             headerView
+            
             productTableView
         }
         .frame(maxWidth: .infinity, alignment: .top)
@@ -171,6 +172,7 @@ struct UserListView: View {
             }
             .buttonStyle(.plain)
         }
+        .disabled(currentRole == .owner)
     }
 }
 

@@ -2,7 +2,7 @@
 //  Information.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 6/1/25.
+// Created by Jose Luna on 6/1/25.
 //
 
 import SwiftUI
@@ -41,7 +41,7 @@ enum CardGraphic {
         switch self {
             case .products: "Productos actualmente registrados en el inventario."
             case .invoices: "Facturas generadas y almacenadas en el sistema."
-            case .users: "Usuarios registrados en la plataforma."
+            case .users: "Usuarios actualmente registrados en el sistema."
         }
     }
     

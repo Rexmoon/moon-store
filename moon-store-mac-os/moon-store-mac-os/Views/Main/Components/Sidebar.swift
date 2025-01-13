@@ -2,7 +2,7 @@
 //  Sidebar.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 4/12/24.
+// Created by Jose Luna on 4/12/24.
 //
 
 import SwiftUI
@@ -20,8 +20,10 @@ struct Sidebar: View {
     
     var body: some View {
         VStack {
-            MSLogo()
-                .leadingInfinity()
+            Image(.msLogo)
+                .resizable()
+                .scaledToFit()
+                .frame(height: Constants.logoSize)
             
             List(availableSections) { section in
                 Section(section.id.uppercased()) {
@@ -77,5 +79,6 @@ extension Sidebar {
         static let buttonRadius: CGFloat = 8
         static let buttonSize: CGFloat = 30
         static let horizontalPadding: CGFloat = 5
+        static let logoSize: CGFloat = 50
     }
 }

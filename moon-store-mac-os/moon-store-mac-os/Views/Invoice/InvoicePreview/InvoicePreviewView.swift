@@ -9,6 +9,7 @@ import SwiftUI
 
 private enum Constants {
     static let spacing: CGFloat = 20
+    static let logoSize: CGFloat = 70
     static let userSpacing: CGFloat = 8
     static let gridSpacing: CGFloat = 4
     static let totalSpacing: CGFloat = 10
@@ -16,12 +17,13 @@ private enum Constants {
     static let cornerRadius: CGFloat = 10
     static let minWidth: CGFloat = 800
     static let minHeight: CGFloat = 500
-    static let logoSize: CGFloat = 100
     static let previewIcon: String = "xmark"
     static let invoiceString: String = "Factura:"
+    static let dismissButtonSize: CGFloat = 20
 }
 
 struct InvoicePreviewView: View {
+    @Environment(\.dismiss) private var dismiss
     private let invoiceSale: InvoiceSaleModel
     
     init(invoiceSale: InvoiceSaleModel) {
@@ -82,20 +84,30 @@ struct InvoicePreviewView: View {
     // MARK: - Header View
     
     private var headerView: some View {
-        HStack {
-            
-            MSLogo()
-                .leadingInfinity()
-            
-            Spacer()
+        HStack(alignment: .top) {
+            Image(.msLogo)
+                .resizable()
+                .scaledToFit()
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: Constants.logoSize,
+                    alignment: .leading
+                )
             
             VStack(alignment: .trailing, spacing: Constants.userSpacing) {
-                HStack {
-                    Text(localized(.bill))
-                        .bold()
-                    
-                    Text(invoiceSale.id.description)
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .resizable()
+                        .frame(square: Constants.dismissButtonSize)
+                        .foregroundStyle(.msPrimary)
                 }
+                .buttonStyle(.plain)
+                
+                Text(localized(.bill))
+                    .bold() +
+                Text(invoiceSale.id.description)
                 
                 Text(invoiceSale.createAt)
             }
@@ -212,21 +224,10 @@ struct InvoicePreviewView: View {
 
 extension InvoicePreviewView {
     private enum LocalizedKey {
-        case ownerPhone
-        case ownerEmail
-        case ownerAddress
-        case clientData
-        case name
-        case identification
-        case invoiceDetail
-        case amount
-        case description
-        case unitPrice
-        case totalPrice
-        case subTotal
-        case IVA
-        case total
-        case bill
+        case ownerPhone, ownerEmail, ownerAddress, clientData,
+             name, identification, invoiceDetail, amount,
+             description, unitPrice, totalPrice, subTotal,
+             IVA, total, bill
         case currencyValue(Double?)
         case pdfFileName(String)
     }

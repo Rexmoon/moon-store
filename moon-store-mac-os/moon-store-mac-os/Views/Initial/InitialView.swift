@@ -2,7 +2,7 @@
 //  InitialView.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 18/12/24.
+// Created by Jose Luna on 18/12/24.
 //
 
 import SwiftUI

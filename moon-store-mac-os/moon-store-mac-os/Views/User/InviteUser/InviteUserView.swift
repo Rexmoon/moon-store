@@ -2,7 +2,7 @@
 //  UserInviteView.swift
 //  moon-store-mac-os
 //
-//  Created by Diana Zeledon on 28/12/24.
+// Created by Jose Luna on 28/12/24.
 //
 
 import SwiftUI

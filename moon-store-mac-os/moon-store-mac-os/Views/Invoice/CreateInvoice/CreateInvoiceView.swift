@@ -13,6 +13,10 @@ private enum Constants {
     static let buttonHeight: CGFloat = 30
     static let deleteButtonTopPadding: CGFloat = 24
     static let gridListCornerRadius: CGFloat = 6
+    static let cornerRadius: CGFloat = 6
+    static let lineWidth: CGFloat = 0.5
+    static let textfieldHeight: CGFloat = 40
+    static let menuPadding: CGFloat = 5
 }
 
 struct CreateInvoiceView: View {
@@ -74,8 +78,7 @@ struct CreateInvoiceView: View {
     private var invoiceGridList: some View {
         ScrollView(showsIndicators: false) {
             Grid(verticalSpacing: Constants.viewSpacing) {
-                ForEach(Array($viewModel.invoice.products.enumerated()),
-                        id: \.offset) { index, $product in
+                ForEach(Array($viewModel.invoice.products.enumerated()), id: \.element.id) { index, $product in
                     GridRow {
                         VStack {
                             Text(localized(.productMenuTitle))
@@ -83,21 +86,28 @@ struct CreateInvoiceView: View {
                             Menu(product.name) {
                                 ForEach(viewModel.products) { productForSelect in
                                     Button(productForSelect.name) {
-                                        product.selectedProduct = productForSelect
+                                        let ids = viewModel.invoice.products.map { $0.id }
+                                        
+                                        if ids.contains(productForSelect.id.description) {
+                                            AlertPresenter.showAlert("El product ya existe en la lista")
+                                        } else {
+                                            product.selectedProduct = productForSelect
+                                        }
                                     }
                                 }
                             }
-                            .frame(maxHeight: .infinity,
-                                   alignment: .center)
+                            .menuStyle(.borderlessButton)
+                            .frame(height: Constants.textfieldHeight)
+                            .padding(.horizontal, Constants.menuPadding)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                                    .stroke(.gray, lineWidth: Constants.lineWidth)
+                            }
                         }
-                        .frame(maxHeight: .infinity,
-                               alignment: .top)
+                        .frame(maxHeight: .infinity, alignment: .top)
                         
                         MSTextField(title: localized(.quantityTitle),
                                     text: $product.quantity.allowOnlyNumbers)
-                        
-                        MSTextField(title: localized(.descriptionTitle),
-                                    text: $product.description)
                         
                         MSTextField(title: localized(.unitPriceTitle),
                                     text: $product.price)
@@ -135,7 +145,6 @@ extension CreateInvoiceView {
         case clientIdentificationField
         case productMenuTitle
         case quantityTitle
-        case descriptionTitle
         case unitPriceTitle
         case totalPriceTitle
         case deleteRowButton
@@ -150,7 +159,6 @@ extension CreateInvoiceView {
             case .clientIdentificationField: "Identificación del cliente"
             case .productMenuTitle: "Producto"
             case .quantityTitle: "Cantidad"
-            case .descriptionTitle: "Descripción"
             case .unitPriceTitle: "P. Unitario"
             case .totalPriceTitle: "P. Total"
             case .deleteRowButton: "Borrar"

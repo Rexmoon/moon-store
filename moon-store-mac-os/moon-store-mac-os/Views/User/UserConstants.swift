@@ -2,7 +2,7 @@
 //  UserConstants.swift
 //  moon-store-mac-os
 //
-//  Created by Diana Zeledon on 30/12/24.
+// Created by Jose Luna on 30/12/24.
 //
 
 import SwiftUI

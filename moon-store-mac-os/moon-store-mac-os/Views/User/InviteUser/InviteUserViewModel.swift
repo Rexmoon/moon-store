@@ -27,13 +27,14 @@ final class InviteUserViewModel: ObservableObject {
     }
     
     func showModalToInviteUser() {
-        AlertPresenter.showConfirmationAlert(message: "La aplicación abrirá un correo electrónico con la invitación. Desea continuar?",
-                                             actionButtonTitle: "Continuar") { [weak self] in
-            guard let self else { return }
-            openMailApp()
-        }
+        AlertPresenter.showConfirmationAlert(
+            message: "La aplicación abrirá un correo electrónico con la invitación. Desea continuar?",
+            actionButtonTitle: "Continuar",
+            action: #selector(openMailApp)
+        )
     }
     
+    @objc
     private func openMailApp() {
         let mailtoURLString = "mailto:\(email)?subject=\(Constants.emailSubject)&body=\(Constants.emailBody)"
         

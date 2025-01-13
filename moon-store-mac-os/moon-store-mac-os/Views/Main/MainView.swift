@@ -2,7 +2,7 @@
 //  MainView.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 11/16/24.
+// Created by Jose Luna on 11/16/24.
 //
 
 import SwiftUI

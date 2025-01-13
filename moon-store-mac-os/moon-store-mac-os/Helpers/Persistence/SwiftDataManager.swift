@@ -2,7 +2,7 @@
 //  SwiftDataManager.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 6/12/24.
+// Created by Jose Luna on 6/12/24.
 //
 
 import Foundation

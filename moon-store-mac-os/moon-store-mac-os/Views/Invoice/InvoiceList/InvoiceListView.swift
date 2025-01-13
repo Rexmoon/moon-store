@@ -9,17 +9,17 @@ import SwiftUI
 
 private enum Constants {
     static let columnsNumber: Int = 4
-    static let gridCellColumns: Int = 2
     static let historyGridPadding: CGFloat = 30
     static let fileName: String = "Historial de ventas"
     static let reloadIcon: String = "arrow.clockwise"
     static let pair: Int = 2
-    static let cornerRadius: CGFloat = 6
+    static let cornerRadius: CGFloat = 10
+    static let optionSize: CGFloat = 100
+    static let rowHeight: CGFloat = 40
 }
 
 struct InvoiceListView: View {
     @ObservedObject private var viewModel: InvoiceListViewModel = .init()
-    @State private var showInvoicePreview: Bool = false
     
     var body: some View {
         VStack {
@@ -30,13 +30,12 @@ struct InvoiceListView: View {
             )
             .disabled(viewModel.cannotExportInvoice)
             .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding()
+            .padding([.top, .trailing])
             
             historyList
+                .padding(.horizontal)
             
-            if viewModel.canShowCounter {
-                TextCounterView(viewModel.invoiceCount)
-            }
+            TextCounterView(viewModel.invoiceCount)
         }
         .showSpinner($viewModel.isLoading)
         .frame(maxHeight: .infinity, alignment: .top)
@@ -59,22 +58,26 @@ struct InvoiceListView: View {
             GridRow {
                 Group {
                     Text(localized(.clientRowTitle))
+                        .padding(.leading)
+                    
                     Text(localized(.idRowTitle))
                     Text(localized(.dateRowTitle))
-                        .gridCellColumns(Constants.gridCellColumns)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Text(" ")
+                    .frame(width: Constants.optionSize)
+                    .padding(.trailing)
             }
         }
-        .padding()
-        .background(.msWhite,
-                    in: .rect(cornerRadius: Constants.cornerRadius))
+        .frame(height: Constants.rowHeight)
+        .background(.msWhite)
     }
         
     // MARK: - History List View
     
     private var historyList: some View {
-        Grid {
+        VStack {
             headerListView
             
             if viewModel.shouldShowEmptyView {
@@ -85,8 +88,11 @@ struct InvoiceListView: View {
                 itemRows
             }
         }
-        .padding(.horizontal, Constants.historyGridPadding)
-        .padding(.vertical)
+        .clipShape(.rect(cornerRadius: Constants.cornerRadius))
+        .overlay {
+            RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                .stroke(.msGray)
+        }
     }
     
     // MARK: - Item View
@@ -94,35 +100,32 @@ struct InvoiceListView: View {
     private var itemRows: some View {
         GridRow {
             ScrollView(showsIndicators: false) {
-                Grid(horizontalSpacing: .zero) {
-                    ForEach(Array(viewModel.invoiceList.enumerated()),
-                            id: \.offset) { index, invoice in
+                Grid(horizontalSpacing: .zero, verticalSpacing: .zero) {
+                    ForEach(Array(viewModel.invoiceList.enumerated()), id: \.element.id) { index, invoice in
                         GridRow {
                             Group {
                                 Text(invoice.customerName)
+                                    .padding(.leading)
                                 Text(invoice.customerIdentification)
                                 Text(invoice.createdAt.formattedDate ?? localized(.invalidDate))
-                                
-                                Button(localized(.showInvoiceButton)) {
-                                    viewModel.updateInvoiceSelected(with: invoice.id)
-                                }
-                                .buttonStyle(.plain)
-                                .underline()
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Button(localized(.showInvoiceButton)) {
+                                viewModel.updateInvoiceSelected(with: invoice.id)
+                            }
+                            .buttonStyle(.plain)
+                            .underline()
+                            .frame(width: Constants.optionSize, alignment: .trailing)
+                            .padding(.trailing)
                         }
-                        .padding()
+                        .frame(height: Constants.rowHeight)
                         .background(index % Constants.pair == .zero
                                     ? .clear
-                                    : .msWhite,
-                                    in: .rect(cornerRadius: Constants.cornerRadius))
+                                    : .msWhite)
                     }
                 }
-                .onReceive(viewModel.$selectedSale) { sale in
-                    guard let _ = sale else { return }
-                    showInvoicePreview.toggle()
-                }
-                .sheet(isPresented: $showInvoicePreview) {
+                .sheet(isPresented: $viewModel.showInvoicePreview) {
                     if let sale = viewModel.selectedSale {
                         InvoicePreviewView(invoiceSale: sale)
                     }

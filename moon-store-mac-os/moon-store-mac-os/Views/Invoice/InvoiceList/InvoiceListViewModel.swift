@@ -13,10 +13,13 @@ private enum Constants {
 
 final class InvoiceListViewModel: ObservableObject {
     @Published var invoiceList: [InvoiceModel] = []
-    @Published var invoicePreviewList: [InvoiceSaleModel] = []
+    @Published var showInvoicePreview: Bool = false
     @Published var isLoading: Bool = false
     @Published var selectedSale: InvoiceSaleModel?
-    @Published var invoiceCount: Int = 0
+    @Published var invoiceCount: Int = .zero
+    
+    private var invoicePreviewList: [InvoiceSaleModel] = []
+    private let invoiceManager: InvoiceManager = .init()
     
     var cannotExportInvoice: Bool {
         invoiceList.isEmpty
@@ -27,20 +30,13 @@ final class InvoiceListViewModel: ObservableObject {
         !isLoading
     }
     
-    var canShowCounter: Bool {
-        invoiceList.isNotEmpty &&
-        !isLoading
-    }
-    
-    private let invoiceManager: InvoiceManager = .init()
-    
     init() {
         getInvoices()
     }
     
     func getInvoices() {
         isLoading = true
-        invoiceList = []
+        
         Task { @MainActor in
             defer { isLoading = false }
             
@@ -76,9 +72,9 @@ final class InvoiceListViewModel: ObservableObject {
     }
     
     func updateInvoiceSelected(with id: Int) {
-        guard let invoice = invoicePreviewList.first(where: { $0.id == id })
-        else { return }
+        guard let invoice = invoicePreviewList.first(where: { $0.id == id }) else { return }
         selectedSale = invoice
+        showInvoicePreview = true
     }
     
     private func getInvoiceCount() {

@@ -2,7 +2,7 @@
 //  ProductListView.swift
 //  moon-store-mac-os
 //
-//  Created by Diana Zeledon on 11/12/24.
+// Created by Jose Luna on 11/12/24.
 //
 
 import SwiftUI
@@ -178,11 +178,6 @@ struct ProductListView: View {
             .buttonStyle(.plain)
             .foregroundStyle(.msPrimary)
             .underline()
-
-            Image(.edit)
-                .resizable()
-                .frame(square: Constants.ProductRow.iconSize)
-                .foregroundStyle(.msGray)
 
             Button {
                 viewModel.showDeleteAlert(with: product.id)

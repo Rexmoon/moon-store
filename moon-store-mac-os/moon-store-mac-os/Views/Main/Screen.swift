@@ -2,7 +2,7 @@
 //  Screen.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 17/11/24.
+// Created by Jose Luna on 17/11/24.
 //
 
 enum ScreenSection: String, Identifiable, CaseIterable {
@@ -16,7 +16,7 @@ enum ScreenSection: String, Identifiable, CaseIterable {
         switch self {
             case .overview: [.charts, .users, .backups]
             case .inventory: [.products]
-            case .billing: [.createInvoice, .salesReport, .invoices]
+            case .billing: [.createInvoice, .invoices]
         }
     }
     

@@ -2,7 +2,7 @@
 //  ExporterButton.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 3/1/25.
+// Created by Jose Luna on 3/1/25.
 //
 
 import SwiftUI

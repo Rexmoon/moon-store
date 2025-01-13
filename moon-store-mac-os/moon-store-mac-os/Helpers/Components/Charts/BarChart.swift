@@ -2,7 +2,7 @@
 //  BarChart.swift
 //  moon-store-mac-os
 //
-//  Created by Steven Santeliz on 10/1/25.
+// Created by Jose Luna on 10/1/25.
 //
 
 import SwiftUI
@@ -30,9 +30,8 @@ struct BarChart: View {
     
     var body: some View {
         VStack(alignment: titleAlignment) {
-            if let title {
-                Text(title)
-                    .font(.title)
+            if let title, data.isNotEmpty {
+                Text(title).bold()
             }
             
             Chart {
