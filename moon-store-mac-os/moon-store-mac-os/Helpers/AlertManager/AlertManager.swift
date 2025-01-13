@@ -35,18 +35,41 @@ final class AlertPresenter {
     
     static func showConfirmationAlert(message: String,
                                       actionButtonTitle: String,
-                                      action: @escaping () -> Void) {
+                                      isDestructive: Bool = false,
+                                      action: Selector?) {
         let alert = NSAlert()
+        
         alert.messageText = AlertType.warning.title
         alert.informativeText = message
-        
         alert.icon = NSImage(named: AlertType.warning.icon)
+        
+        let button = alert.addButton(withTitle: actionButtonTitle)
+        button.hasDestructiveAction = isDestructive
+        button.action = action
+        
         alert.addButton(withTitle: "Cancelar")
-        alert.addButton(withTitle: actionButtonTitle)
+        alert.runModal()
+    }
+    
+    static func showConfirmationAlert(message: String,
+                                      actionButtonTitle: String,
+                                      isDestructive: Bool = false,
+                                      action: (() -> Void)? = nil) {
+        let alert = NSAlert()
+        
+        alert.messageText = AlertType.warning.title
+        alert.informativeText = message
+        alert.icon = NSImage(named: AlertType.warning.icon)
+        
+        let button = alert.addButton(withTitle: actionButtonTitle)
+        button.hasDestructiveAction = isDestructive
+        
+        alert.addButton(withTitle: "Cancelar")
+        
         let response = alert.runModal()
         
-        if response == .alertSecondButtonReturn {
-            action()
+        if response == .alertFirstButtonReturn {
+            action?()
         }
     }
 }

@@ -30,9 +30,10 @@ struct InvoiceListView: View {
             )
             .disabled(viewModel.cannotExportInvoice)
             .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding()
+            .padding([.top, .trailing])
             
             historyList
+                .padding(.horizontal)
             
             TextCounterView(viewModel.invoiceCount)
         }
@@ -92,8 +93,6 @@ struct InvoiceListView: View {
             RoundedRectangle(cornerRadius: Constants.cornerRadius)
                 .stroke(.msGray)
         }
-        .padding(.horizontal, Constants.historyGridPadding)
-        .padding(.vertical)
     }
     
     // MARK: - Item View

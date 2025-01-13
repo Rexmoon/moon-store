@@ -52,8 +52,11 @@ final class UserListViewModel: ObservableObject {
     }
     
     func showDisableUserConfirmationAlert(for id: Int) {
-        AlertPresenter.showConfirmationAlert(message: "Estas seguro que quieres desabilitar este usuario?",
-                                             actionButtonTitle: "Desabilitar") { [weak self] in
+        AlertPresenter.showConfirmationAlert(
+            message: "Estas seguro que quieres desabilitar este usuario?",
+            actionButtonTitle: "Deshabilitar",
+            isDestructive: true
+        ) { [weak self] in
             guard let self else { return }
             disableUser(with: id)
         }
@@ -74,6 +77,7 @@ final class UserListViewModel: ObservableObject {
         }
     }
     
+    @objc
     private func enableUser(with id: Int) {
         isLoading = true
         

@@ -27,20 +27,23 @@ struct BackupView: View {
             .frame(maxWidth: .infinity, alignment: .trailing)
             
             if viewModel.backupList.isNotEmpty {
-                List(viewModel.backupList, id: \.self) { backup in
-                    HStack {
-                        Text("\(localizedString(.rowPrefix)) \(backup)")
-                            .lineLimit(Constants.lineLimit)
-                        
-                        PrimaryButton(localizedString(.restoreButton)) {
-                            viewModel.restoreBackup(backup)
+                ScrollView {
+                    ForEach(viewModel.backupList, id: \.self) { backup in
+                        HStack {
+                            Text("\(localizedString(.rowPrefix)) \(backup)")
+                                .lineLimit(Constants.lineLimit)
+                            
+                            PrimaryButton(localizedString(.restoreButton)) {
+                                viewModel.restoreBackup(backup)
+                            }
+                            .frame(width: Constants.buttonWidth, height: Constants.restoreButtonHeight)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                         }
-                        .frame(width: Constants.buttonWidth, height: Constants.restoreButtonHeight)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding()
                     }
-                    .padding(.vertical)
                 }
-                .clipShape(.rect(cornerRadius: Constants.cornerRadius))
+                .background(.msWhite, in: .rect(cornerRadius: Constants.cornerRadius))
+                .fixedSize(horizontal: false, vertical: true)
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)

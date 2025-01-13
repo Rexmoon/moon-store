@@ -15,6 +15,7 @@ struct UserListView: View {
     var body: some View {
         VStack(spacing: UserConstants.spacing) {
             headerView
+            
             productTableView
         }
         .frame(maxWidth: .infinity, alignment: .top)
@@ -171,6 +172,7 @@ struct UserListView: View {
             }
             .buttonStyle(.plain)
         }
+        .disabled(currentRole == .owner)
     }
 }
 

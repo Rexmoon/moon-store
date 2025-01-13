@@ -179,11 +179,6 @@ struct ProductListView: View {
             .foregroundStyle(.msPrimary)
             .underline()
 
-            Image(.edit)
-                .resizable()
-                .frame(square: Constants.ProductRow.iconSize)
-                .foregroundStyle(.msGray)
-
             Button {
                 viewModel.showDeleteAlert(with: product.id)
             } label: {

@@ -30,9 +30,8 @@ struct AreaChart: View {
     
     var body: some View {
         VStack(alignment: titleAlignment) {
-            if let title {
-                Text(title)
-                    .font(.title)
+            if let title, data.isNotEmpty {
+                Text(title).bold()
             }
             
             Chart {
