@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct DetailViewContainer<Content: View, IMSCollection: Collection>: View {
+struct ReportDetailContainer<Content: View, MSCollection: Collection>: View {
     @Binding private var showDetailView: Bool
     private let content: Content
-    private let collection: IMSCollection
+    private let collection: MSCollection
     
     init(showDetailView: Binding<Bool>,
-         collection: IMSCollection,
+         collection: MSCollection,
          @ViewBuilder content: () -> Content) {
         _showDetailView = showDetailView
         self.collection = collection
@@ -34,7 +34,7 @@ struct DetailViewContainer<Content: View, IMSCollection: Collection>: View {
                 
                 ExcelExporterButton(
                     title: "Exportar",
-                    fileName: "IMS Excel Exportación",
+                    fileName: "MS Reporte - \(Date.now)",
                     collection: collection
                 )
             }

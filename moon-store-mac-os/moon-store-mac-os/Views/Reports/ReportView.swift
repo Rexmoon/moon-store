@@ -47,7 +47,7 @@ struct ReportView: View {
                 }
             }
             
-            DetailViewContainer(showDetailView: $showDetailView, collection: collection) {
+            ReportDetailContainer(showDetailView: $showDetailView, collection: collection) {
                 buildView
             }
             .offset(x: showDetailView ? .zero : NSScreen.main?.frame.width ?? .zero)
