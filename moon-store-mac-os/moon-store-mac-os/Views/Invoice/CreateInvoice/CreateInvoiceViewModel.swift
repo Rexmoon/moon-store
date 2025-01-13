@@ -73,7 +73,8 @@ final class CreateInvoiceViewModel: ObservableObject {
             defer { isLoading = false }
             
             do {
-                products = try await productManager.getProducts()
+                let productsFetched = try await productManager.getProducts()
+                products = productsFetched.filter { $0.stock > .zero }
             } catch {
                 AlertPresenter.showAlert(with: error)
             }
