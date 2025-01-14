@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class ProfileViewModel: ObservableObject {
     @Published var currentPassword: String = ""
     @Published var newPassword: String = ""
@@ -26,7 +27,7 @@ final class ProfileViewModel: ObservableObject {
         
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             do {
                 try await userManager.updatePassword(email: email,

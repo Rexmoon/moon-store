@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class UserListViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var userList: [UserModel] = []
@@ -31,7 +32,7 @@ final class UserListViewModel: ObservableObject {
     func getUsers() {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {
@@ -65,7 +66,7 @@ final class UserListViewModel: ObservableObject {
     func assignRole(role: String, email: String, revoke: Int?) {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {
@@ -81,7 +82,7 @@ final class UserListViewModel: ObservableObject {
     private func enableUser(with id: Int) {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {
@@ -96,7 +97,7 @@ final class UserListViewModel: ObservableObject {
     private func disableUser(with id: Int) {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {

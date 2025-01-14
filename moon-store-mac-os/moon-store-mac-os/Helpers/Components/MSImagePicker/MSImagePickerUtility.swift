@@ -8,6 +8,7 @@
 import PhotosUI
 import SwiftUI
 
+@MainActor
 final class MSImagePickerUtility {
     func loadImage(from item: PhotosPickerItem?) async -> Image? {
         guard let item else { return nil }

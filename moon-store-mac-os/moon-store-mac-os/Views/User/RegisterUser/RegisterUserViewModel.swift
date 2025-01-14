@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class RegisterUserViewModel: ObservableObject {
     @Published var userModel: UserRegisterModel = .init()
     @Published var isLoading: Bool = false
@@ -22,7 +23,7 @@ final class RegisterUserViewModel: ObservableObject {
     func registerUser() {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {

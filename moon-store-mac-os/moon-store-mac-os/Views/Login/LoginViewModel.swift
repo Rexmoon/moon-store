@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class LoginViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
@@ -27,7 +28,7 @@ final class LoginViewModel: ObservableObject {
     func login() {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {

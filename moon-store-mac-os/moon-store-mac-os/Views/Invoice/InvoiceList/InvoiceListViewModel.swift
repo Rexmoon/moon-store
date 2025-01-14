@@ -11,6 +11,7 @@ private enum Constants {
     static let invalidDate: String = "Fecha inválida"
 }
 
+@MainActor
 final class InvoiceListViewModel: ObservableObject {
     @Published var invoiceList: [InvoiceModel] = []
     @Published var showInvoicePreview: Bool = false
@@ -37,7 +38,7 @@ final class InvoiceListViewModel: ObservableObject {
     func getInvoices() {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {
@@ -80,7 +81,7 @@ final class InvoiceListViewModel: ObservableObject {
     private func getInvoiceCount() {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {

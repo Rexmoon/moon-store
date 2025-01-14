@@ -19,6 +19,7 @@ private enum Constants {
     """
 }
 
+@MainActor
 final class InviteUserViewModel: ObservableObject {
     @Published var email: String = ""
     

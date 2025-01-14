@@ -15,6 +15,7 @@ private enum Constants {
 
 private typealias AsyncData = ([ProductModel], [InvoiceModel], UserChartResponse)
 
+@MainActor
 final class GraphicsViewModel: ObservableObject {
     @Published var cardGraphicModels: [CardGraphicModel] = []
     @Published var mostProductsSold: [ChartData] = []
@@ -33,7 +34,7 @@ final class GraphicsViewModel: ObservableObject {
     
     private func loadData() {
         isLoading = true
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             do {
                 let asyncData = try await fetchAsyncData()

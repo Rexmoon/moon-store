@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class ProductListViewModel: ObservableObject {
     @Published var productList: [ProductModel] = []
     @Published var isLoading: Bool = false
@@ -43,7 +44,7 @@ final class ProductListViewModel: ObservableObject {
     func getProducts() {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {
@@ -75,7 +76,7 @@ final class ProductListViewModel: ObservableObject {
         
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer {
                 isLoading = false
             }
@@ -95,7 +96,7 @@ final class ProductListViewModel: ObservableObject {
     }
     
     private func getProductCount() {
-        Task { @MainActor in
+        Task { 
             do {
                 productCount = try await productManager.getProductCount()
             } catch {
@@ -108,7 +109,7 @@ final class ProductListViewModel: ObservableObject {
         guard let productSelected else { return }
         
         isLoading = true
-        Task { @MainActor in
+        Task { 
             defer {
                 isLoading = false
             }

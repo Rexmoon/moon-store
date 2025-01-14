@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class ReportViewModel: ObservableObject {
     @Published var allProducts: [ProductModel] = []
     @Published var availableStock: [ProductModel] = []
@@ -34,7 +35,7 @@ final class ReportViewModel: ObservableObject {
     }
     
     private func getProducts() {
-        Task { @MainActor in
+        Task { 
             do {
                 let products = try await productManager.getProducts()
                 allProducts = products
@@ -47,7 +48,7 @@ final class ReportViewModel: ObservableObject {
     }
     
     private func getUsers() {
-        Task { @MainActor in
+        Task { 
             do {
                 let userList = try await userManager.getUsers()
                 users = userList.sorted { $0.createdAt > $1.createdAt }
@@ -58,7 +59,7 @@ final class ReportViewModel: ObservableObject {
     }
     
     private func getInvoices() {
-        Task { @MainActor in
+        Task { 
             do {
                 let sales = try await invoiceManager.getInvoices()
                 invoices = sales.sorted { $0.createdAt > $1.createdAt }

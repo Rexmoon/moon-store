@@ -12,6 +12,7 @@ private enum Constants {
     static let maxRowCount: Int = 10
 }
 
+@MainActor
 final class CreateInvoiceViewModel: ObservableObject {
     @Published var invoice: InvoiceSaleModel = .init()
     @Published var products: [ProductModel] = []
@@ -39,6 +40,7 @@ final class CreateInvoiceViewModel: ObservableObject {
         getProducts()
     }
     
+    @MainActor
     func addInvoiceRow() {
         cannotAddInvoiceRow
         ? showMaxRowCountExceededAlert()
@@ -52,7 +54,7 @@ final class CreateInvoiceViewModel: ObservableObject {
     func createInvoice() {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {
@@ -69,7 +71,7 @@ final class CreateInvoiceViewModel: ObservableObject {
     private func getProducts() {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {
@@ -86,6 +88,7 @@ final class CreateInvoiceViewModel: ObservableObject {
         products = []
     }
     
+    @MainActor
     private func showMaxRowCountExceededAlert() {
         AlertPresenter.showAlert(
             "No se pueden agregar más de \(Constants.maxRowCount) productos por factura."

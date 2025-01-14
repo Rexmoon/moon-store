@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class BackupViewModel: ObservableObject {
     @Published var backupList: [String] = []
     @Published var isLoading: Bool = false
@@ -24,7 +25,7 @@ final class BackupViewModel: ObservableObject {
     func getBackupList() {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {
@@ -48,7 +49,7 @@ final class BackupViewModel: ObservableObject {
     func restoreBackup(_ backup: String) {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {
@@ -65,7 +66,7 @@ final class BackupViewModel: ObservableObject {
     private func backupDatabase() {
         isLoading = true
         
-        Task { @MainActor in
+        Task { 
             defer { isLoading = false }
             
             do {

@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class AuthenticationManager {
     private let networkManager: NetworkManager = .init()
     private let decoder: JSONDecoder = .init()
